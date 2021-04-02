@@ -50,3 +50,12 @@ export function deleteUser (id) {
     url: "users/" + id
   })
 }
+
+// 分配角色
+export function putAllotRole (id, rid) {
+  return requset({
+    method: "PUT",
+    url: `users/${id}/role`,
+    data: { rid: rid }
+  })
+}

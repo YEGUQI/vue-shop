@@ -20,7 +20,9 @@
         </el-col>
         <el-col :span="4">
           <!-- 添加用户按钮 -->
-          <el-button type="primary" @click="addUservisible">添加用户</el-button>
+          <el-button type="primary" @click="addUserDialog = true"
+            >添加用户</el-button
+          >
         </el-col>
       </el-row>
 
@@ -56,17 +58,19 @@
               size="mini"
               @click="deleteUserClick(scope.row.id)"
             ></el-button>
-            <!-- 分配权限按钮 -->
+            <!-- 文字提示框 -->
             <el-tooltip
               effect="dark"
-              content="分配权限"
+              content="分配角色"
               placement="top"
               :enterable="false"
             >
+              <!-- 分配角色按钮 -->
               <el-button
                 type="warning"
                 icon="el-icon-setting"
                 size="mini"
+                @click="showAllotRoleDialog(scope.row)"
               ></el-button>
             </el-tooltip>
           </template>
@@ -146,6 +150,31 @@
         <el-button type="primary" @click="editUser">确 定</el-button>
       </span>
     </el-dialog>
+
+    <!-- 分配权限对话框 -->
+    <el-dialog
+      title="分配角色"
+      :visible.sync="allotRoleDialogVisible"
+      width="50%"
+      @close="clearselectRoleId"
+    >
+      <p>当前用户：{{ userdata.username }}</p>
+      <p>当前角色：{{ userdata.role_name }}</p>
+      <p>分配新角色：</p>
+      <el-select v-model="selectRoleId" placeholder="请选择">
+        <el-option
+          v-for="item in roleList"
+          :key="item.id"
+          :label="item.roleName"
+          :value="item.id"
+        >
+        </el-option>
+      </el-select>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="AllotRole">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -156,9 +185,11 @@ import {
   postAdduser,
   getQueryID,
   putUser,
-  deleteUser
+  deleteUser,
+  putAllotRole
+  // <!-- putAllotRole -->
 } from "network/user.js"
-
+import { getRoleList } from "network/role.js"
 export default {
   data() {
     // 自定义邮箱验证规则
@@ -186,11 +217,22 @@ export default {
         // 当前每页显示多少条数据
         pagesize: 5
       },
+      // 当前用户信息
+      userdata: {},
       // 用户列表数据
       userList: [],
+      // 角色列表
+      roleList: {},
+      // 总数据条数
       total: 0,
+      // 选中的角色的id
+      selectRoleId: "",
       // 控制添加用户对话框的显示与隐藏
       addUserDialog: false,
+      // 控制修改用户对话框的显示与隐藏
+      editDialogVisible: false,
+      // 分配角色对话框的显示与隐藏
+      allotRoleDialogVisible: false,
       // 添加用户的表单数据
       addForm: {
         username: "",
@@ -198,8 +240,6 @@ export default {
         email: "",
         mobile: ""
       },
-      // 控制修改用户对话框的显示与隐藏
-      editDialogVisible: false,
       // 修改用户的表单数据
       editUserInfo: {},
       // 添加用户的表单验证规则
@@ -296,11 +336,6 @@ export default {
       }
       this.$message.success("更新用户状态成功")
     },
-    // 控制添加用户对话框的显示与隐藏
-    addUservisible() {
-      this.addUserDialog = true
-    },
-
     // 监听添加用户对话框的关闭事件
     addDialogClose() {
       // 对话框关闭 重置表单
@@ -314,7 +349,7 @@ export default {
           return res.data
         })
         if (result.meta.status !== 201) {
-          this.$message.error(result.meta.msg)
+          return this.$message.error(result.meta.msg)
         }
         this.$message.success("添加用户成功")
         // 关闭添加用户对话框
@@ -345,7 +380,7 @@ export default {
         })
         console.log(result)
         if (result.meta.status !== 200) {
-          this.$message.error("修改用户信息失败")
+          return this.$message.error("修改用户信息失败")
         }
 
         this.$message.success("修改用户信息成功")
@@ -380,6 +415,34 @@ export default {
       this.$message.success("删除用户成功")
       // 重新获取用户列表
       this.getuserData()
+    },
+    // 显示分配角色对话框 并获取角色信息
+    async showAllotRoleDialog(userinfo) {
+      this.userdata = userinfo
+      this.allotRoleDialogVisible = true
+      const result = await getRoleList().then(res => {
+        return res.data
+      })
+      this.roleList = result.data
+    },
+    // 分配角色
+    async AllotRole() {
+      const result = await putAllotRole(
+        this.userdata.id,
+        this.selectRoleId
+      ).then(res => {
+        return res.data
+      })
+      if (result.meta.status !== 200) {
+        return this.$message.error("分配角色失败")
+      }
+      this.$message.success("分配角色成功")
+      this.getuserData()
+      this.allotRoleDialogVisible = false
+    },
+    // 分配角色对话框关闭 清除 selectRoleId
+    clearselectRoleId() {
+      this.selectRoleId = ""
     }
   }
 }

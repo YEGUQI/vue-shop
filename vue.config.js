@@ -9,7 +9,9 @@ module.exports = {
         views: "@/views",
         network: "@/network",
         home: "@/views/home",
-        user: "@/views/user"
+        user: "@/views/user",
+        rights: "@/views/power/rights",
+        roleList: "@/views/power/roleList"
       }
     }
   }
