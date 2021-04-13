@@ -1,4 +1,4 @@
-import { requset } from "./requset"
+import { requset } from "../requset"
 // 添加角色
 export function postAddRole (roleInfo) {
   return requset({

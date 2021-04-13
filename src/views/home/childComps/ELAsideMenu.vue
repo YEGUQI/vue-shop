@@ -71,9 +71,7 @@ export default {
   methods: {
     // 请求菜单数据数据
     async menulist() {
-      const result = await getMenuList().then(res => {
-        return res.data
-      })
+      const { data: result } = await getMenuList()
       if (result.meta.status !== 200)
         return this.$message.error(result.meta.msg)
       this.menuList = result

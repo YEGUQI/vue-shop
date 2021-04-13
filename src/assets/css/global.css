@@ -1,8 +1,15 @@
 body,
-html,
-#app {
+html,#app {
   height: 100%;
   margin: 0;
   padding: 0;
   min-width: 1366px;
 }
+.el-cascader-panel{
+  height: 200px;
+}
+.ql-editor{
+  min-height: 300px !important;
+  height: 300px !important;
+}
+

@@ -11,7 +11,10 @@ module.exports = {
         home: "@/views/home",
         user: "@/views/user",
         rights: "@/views/power/rights",
-        roleList: "@/views/power/roleList"
+        roleList: "@/views/power/roleList",
+        cate: "@/views/goods/cate",
+        params: "@/views/goods/params",
+        goodsList: "@/views/goods/goodsList"
       }
     }
   }

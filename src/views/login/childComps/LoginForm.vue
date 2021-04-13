@@ -72,11 +72,7 @@ export default {
         if (!valid) {
           return false
         }
-        const result = await postLogin(this.formInfo)
-          .then(res => {
-            return res.data
-          })
-          .catch(err => console.log(err))
+        const { data: result } = await postLogin(this.formInfo)
         // 根据状态码判断登录是否成功
         if (result.meta.status !== 200) {
           return this.$message.error("登录失败")

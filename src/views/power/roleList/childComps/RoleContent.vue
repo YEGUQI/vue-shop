@@ -177,8 +177,8 @@ import {
   putEditRole,
   deleteRole,
   PostRoleAccredit
-} from "network/role"
-import { getRightsList } from "network/rights"
+} from "network/power/role"
+import { getRightsList } from "network/power/rights"
 
 export default {
   name: "RoleContent",
@@ -232,9 +232,7 @@ export default {
   methods: {
     // *获取角色列表
     async rolesList() {
-      const result = await getRoleList().then(res => {
-        return res.data
-      })
+      const { data: result } = await getRoleList()
       if (result.meta.status !== 200) {
         return this.$message.error("获取角色列表失败")
       }
@@ -243,9 +241,7 @@ export default {
     },
     // ?添加角色
     async addRole() {
-      const result = await postAddRole(this.addRoleForm).then(res => {
-        return res.data
-      })
+      const { data: result } = await postAddRole(this.addRoleForm)
       if (result.meta.status !== 201) {
         return this.$message.error("添加角色失败")
       }
@@ -273,17 +269,13 @@ export default {
       if (confirmres !== "confirm") {
         return this.$message.info("已取消删除操作")
       }
-      const result = await deleteRightById(role.id, right).then(res => {
-        return res.data
-      })
+      const { data: result } = await deleteRightById(role.id, right)
       // 只对部分数据重新赋值 避免整个页面的刷线
       role.children = result.data
     },
     // *获取要修改的角色的信息
     async editRoleinfo(id) {
-      const result = await getSelectRoleById(id).then(res => {
-        return res.data
-      })
+      const { data: result } = await getSelectRoleById(id)
       if (result.meta.status !== 200) {
         return this.$message.error("获取角色信息失败")
       }
@@ -292,9 +284,7 @@ export default {
     },
     // ?提交修改后角色信息
     async editRole() {
-      const result = await putEditRole(this.editRoleForm).then(res => {
-        return res.data
-      })
+      const { data: result } = await putEditRole(this.editRoleForm)
       if (result.meta.status !== 200) {
         return this.$message.error("修改角色信息失败")
       }
@@ -319,9 +309,7 @@ export default {
       if (confirmres !== "confirm") {
         return this.$message.info("已取消删除操作")
       }
-      const result = await deleteRole(id).then(res => {
-        return res.data
-      })
+      const { data: result } = await deleteRole(id)
       if (result.meta.status != 200) {
         this.$message.error("删除角色失败")
       }
@@ -332,9 +320,7 @@ export default {
     // *获取所有权限 并显示分配权限对话框
     async showAllotRoledialog(role) {
       this.roleid = role.id
-      const result = await getRightsList("tree").then(res => {
-        return res.data
-      })
+      const { data: result } = await getRightsList("tree")
       if (result.meta.status !== 200) {
         return this.$message.error("获取权限列表失败")
       }
@@ -350,9 +336,7 @@ export default {
         ...this.$refs.treeRights.getHalfCheckedKeys()
       ]
       const idStr = keys.join(",")
-      const result = await PostRoleAccredit(this.roleid, idStr).then(res => {
-        return res.data
-      })
+      const { data: result } = await PostRoleAccredit(this.roleid, idStr)
       if (result.meta.status !== 200) {
         return this.$message.error("分配权限失败")
       }

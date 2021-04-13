@@ -7,6 +7,10 @@ const Welcome = () => import("home/childComps/Welcome")
 const Users = () => import("user/User")
 const Rights = () => import("rights/Rights")
 const RoleList = () => import("roleList/RoleList")
+const Cate = () => import("cate/Cate")
+const Params = () => import("params/Params")
+const GoodsList = () => import("goodsList/GoodsList")
+const AddGoods = () => import("goodsList/childComps/AddGoods")
 
 Vue.use(VueRouter)
 
@@ -21,7 +25,11 @@ const routes = [
       { path: "/welcome", component: Welcome },
       { path: "/users", component: Users },
       { path: "/rights", component: Rights },
-      { path: "/roles", component: RoleList }
+      { path: "/roles", component: RoleList },
+      { path: "/categories", component: Cate },
+      { path: "/params", component: Params },
+      { path: "/goods", component: GoodsList },
+      { path: "/goods/add", component: AddGoods }
     ]
   }
 ]

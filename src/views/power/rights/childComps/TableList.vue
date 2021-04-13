@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { getRightsList } from "network/rights"
+import { getRightsList } from "network/power/rights"
 export default {
   name: "TableList",
   data() {
@@ -29,15 +29,13 @@ export default {
     }
   },
   created() {
-    this.gitRightList()
+    this.getRightList()
   },
   methods: {
-    async gitRightList() {
-      const result = await getRightsList("list").then(res => {
-        return res.data
-      })
+    // 获取权限列表
+    async getRightList() {
+      const { data: result } = await getRightsList("list")
       this.rightList = result.data
-      console.log(result)
     }
   }
 }

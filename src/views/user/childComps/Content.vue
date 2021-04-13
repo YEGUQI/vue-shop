@@ -189,7 +189,7 @@ import {
   putAllotRole
   // <!-- putAllotRole -->
 } from "network/user.js"
-import { getRoleList } from "network/role.js"
+import { getRoleList } from "network/power/role.js"
 export default {
   data() {
     // 自定义邮箱验证规则
@@ -307,9 +307,7 @@ export default {
   methods: {
     // 获取用户列表数据
     async getuserData() {
-      const result = await getUserList(this.userInfo).then(res => {
-        return res.data
-      })
+      const { data: result } = await getUserList(this.userInfo)
       if (result.meta.status !== 200)
         return this.$message.error(result.meta.msg)
       this.userList = result.data.users
@@ -320,16 +318,14 @@ export default {
       this.userInfo.pagesize = newsize
       this.getuserData()
     },
-    // 当前的页码
+    // 当前的页码发生变化触发
     handleCurrentChange(pagenum) {
       this.userInfo.pagenum = pagenum
       this.getuserData()
     },
     // 更新用户状态
     async userStateChange(Stateinfo) {
-      const result = await putUserState(Stateinfo).then(res => {
-        return res.data
-      })
+      const { data: result } = await putUserState(Stateinfo)
       if (result.meta.status !== 200) {
         Stateinfo.mg_state = !Stateinfo.mg_state
         return this.$message.error("更新用户状态失败")
@@ -345,9 +341,7 @@ export default {
     addUserClick() {
       this.$refs.addForm.validate(async valid => {
         if (!valid) return false
-        const result = await postAdduser(this.addForm).then(res => {
-          return res.data
-        })
+        const { data: result } = await postAdduser(this.addForm)
         if (result.meta.status !== 201) {
           return this.$message.error(result.meta.msg)
         }
@@ -361,9 +355,7 @@ export default {
     // 获取修改的用户信息
     async showEditDialog(id) {
       this.editDialogVisible = true
-      const result = await getQueryID(id).then(res => {
-        return res.data
-      })
+      const { data: result } = await getQueryID(id)
       console.log(result)
       if (result.meta.status !== 200) {
         return this.$message.error("获取用户信息失败")
@@ -375,14 +367,10 @@ export default {
       // 对修改表单中的数据进行预验证
       this.$refs.editFormref.validate(async valid => {
         if (!valid) return false
-        const result = await putUser(this.editUserInfo).then(res => {
-          return res.data
-        })
-        console.log(result)
+        const { data: result } = await putUser(this.editUserInfo)
         if (result.meta.status !== 200) {
           return this.$message.error("修改用户信息失败")
         }
-
         this.$message.success("修改用户信息成功")
         // 重新获取用户列表
         this.getuserData()
@@ -406,9 +394,7 @@ export default {
         return this.$message.info("已取消删除操作")
       }
       // 发送删除请求
-      const result = await deleteUser(id).then(res => {
-        return res.data
-      })
+      const { data: result } = await deleteUser(id)
       if (result.meta.status !== 200) {
         return this.$message.error("删除用户失败")
       }
@@ -420,19 +406,15 @@ export default {
     async showAllotRoleDialog(userinfo) {
       this.userdata = userinfo
       this.allotRoleDialogVisible = true
-      const result = await getRoleList().then(res => {
-        return res.data
-      })
+      const { data: result } = await getRoleList()
       this.roleList = result.data
     },
     // 分配角色
     async AllotRole() {
-      const result = await putAllotRole(
+      const { data: result } = await putAllotRole(
         this.userdata.id,
         this.selectRoleId
-      ).then(res => {
-        return res.data
-      })
+      )
       if (result.meta.status !== 200) {
         return this.$message.error("分配角色失败")
       }
