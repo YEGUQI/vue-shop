@@ -15,7 +15,11 @@ module.exports = {
         cate: "@/views/goods/cate",
         params: "@/views/goods/params",
         goodsList: "@/views/goods/goodsList",
+<<<<<<< HEAD
         order: "@/views/order/"
+=======
+        report: "@/views/report"
+>>>>>>> report
       }
     }
   }

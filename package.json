@@ -10,7 +10,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+<<<<<<< HEAD
     "echarts": "^5.0.2",
+=======
+    "echarts": "^4.1.0",
+>>>>>>> report
     "element-ui": "^2.4.5",
     "eslint": "^7.22.0",
     "lodash": "^4.17.21",
