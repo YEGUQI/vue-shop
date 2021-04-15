@@ -11,11 +11,9 @@ const Cate = () => import("cate/Cate")
 const Params = () => import("params/Params")
 const GoodsList = () => import("goodsList/GoodsList")
 const AddGoods = () => import("goodsList/childComps/AddGoods")
-<<<<<<< HEAD
-const Order = () => import("order/Order")
-=======
-const Report = () => import("report/Report")
->>>>>>> report
+// const Order = () => import("order/Order"),
+// =======
+// const Report = () => import("report/Report")
 
 Vue.use(VueRouter)
 
