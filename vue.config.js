@@ -14,7 +14,8 @@ module.exports = {
         roleList: "@/views/power/roleList",
         cate: "@/views/goods/cate",
         params: "@/views/goods/params",
-        goodsList: "@/views/goods/goodsList"
+        goodsList: "@/views/goods/goodsList",
+        order: "@/views/order/"
       }
     }
   }

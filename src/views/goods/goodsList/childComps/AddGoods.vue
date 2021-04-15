@@ -158,7 +158,7 @@ export default {
       activeIndex: "0",
       // 添加商品表单数据
       addGoodsForm: {
-        goods_name: "测试",
+        goods_name: "",
         goods_price: 0,
         goods_number: 0,
         goods_weight: 0,

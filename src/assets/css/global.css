@@ -12,4 +12,6 @@ html,#app {
   min-height: 300px !important;
   height: 300px !important;
 }
-
+.el-table {
+  margin-top: 15px;
+}

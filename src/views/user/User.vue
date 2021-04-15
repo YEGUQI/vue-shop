@@ -2,12 +2,8 @@
   <div>
     <!-- 面包屑导航 -->
     <Breadcrumb>
-      <template v-slot:title1>
-        用户管理
-      </template>
-      <template v-slot:title2>
-        用户列表
-      </template>
+      <template v-slot:title1>用户管理</template>
+      <template v-slot:title2>用户列表</template>
     </Breadcrumb>
     <!-- 内容主体区域 -->
     <Content></Content>

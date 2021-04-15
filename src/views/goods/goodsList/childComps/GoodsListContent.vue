@@ -36,12 +36,12 @@
           prop="goods_weight"
           width="70px"
         ></el-table-column>
-        <el-table-column label="创建时间" width="180px" prop="add_time">
+        <el-table-column label="创建时间" width="200px" prop="add_time">
           <template slot-scope="scope">{{
             scope.row.add_time | dataFormat
           }}</template>
         </el-table-column>
-        <el-table-column label="操作" width="130px">
+        <el-table-column label="操作" width="160px">
           <template slot-scope="scope">
             <el-button
               type="primary"
