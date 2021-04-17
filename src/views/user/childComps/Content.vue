@@ -356,7 +356,6 @@ export default {
     async showEditDialog(id) {
       this.editDialogVisible = true
       const { data: result } = await getQueryID(id)
-      console.log(result)
       if (result.meta.status !== 200) {
         return this.$message.error("获取用户信息失败")
       }

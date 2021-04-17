@@ -1,5 +1,5 @@
 import { requset } from "./requset"
-export function getMenuList () {
+export function getMenuList() {
   return requset({
     method: "GET",
     url: "menus"

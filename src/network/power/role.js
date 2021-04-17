@@ -1,6 +1,6 @@
 import { requset } from "../requset"
 // 添加角色
-export function postAddRole (roleInfo) {
+export function postAddRole(roleInfo) {
   return requset({
     method: "POST",
     url: "roles",
@@ -9,7 +9,7 @@ export function postAddRole (roleInfo) {
 }
 
 // 获取角色列表
-export function getRoleList () {
+export function getRoleList() {
   return requset({
     method: "GET",
     url: "roles"
@@ -17,7 +17,7 @@ export function getRoleList () {
 }
 
 // 删除角色指定权限
-export function deleteRightById (roleid, rightid) {
+export function deleteRightById(roleid, rightid) {
   return requset({
     method: "DELETE",
     url: `roles/${roleid}/rights/${rightid}`
@@ -25,7 +25,7 @@ export function deleteRightById (roleid, rightid) {
 }
 
 // 根据 id 查询角色
-export function getSelectRoleById (id) {
+export function getSelectRoleById(id) {
   return requset({
     method: "GET",
     url: "roles/" + id
@@ -33,7 +33,7 @@ export function getSelectRoleById (id) {
 }
 
 // 提交修改后的角色信息
-export function putEditRole (roleinfo) {
+export function putEditRole(roleinfo) {
   return requset({
     method: "PUT",
     url: "roles/" + roleinfo.roleId,
@@ -45,7 +45,7 @@ export function putEditRole (roleinfo) {
 }
 
 // 删除角色
-export function deleteRole (id) {
+export function deleteRole(id) {
   return requset({
     method: "DELETE",
     url: "roles/" + id
@@ -53,7 +53,7 @@ export function deleteRole (id) {
 }
 
 // 对角色进行授权
-export function PostRoleAccredit (roleid, rids) {
+export function PostRoleAccredit(roleid, rids) {
   return requset({
     method: "POST",
     url: `roles/${roleid}/rights`,

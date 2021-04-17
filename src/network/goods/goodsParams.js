@@ -1,6 +1,6 @@
 import { requset } from "../requset"
 // 获取对应的参数数据
-export function getParamsList (id, sel) {
+export function getParamsList(id, sel) {
   return requset({
     method: "GET",
     url: `categories/${id}/attributes/`,
@@ -9,7 +9,7 @@ export function getParamsList (id, sel) {
 }
 
 // 添加动态/静态属性
-export function postAddParams (id, paramsForm, attr_sel) {
+export function postAddParams(id, paramsForm, attr_sel) {
   return requset({
     method: "POST",
     url: `categories/${id}/attributes`,
@@ -21,7 +21,7 @@ export function postAddParams (id, paramsForm, attr_sel) {
 }
 
 // 根据 id 查询动态/静态属性
-export function getQuitParams (id, attrId) {
+export function getQuitParams(id, attrId) {
   return requset({
     method: "GET",
     url: `categories/${id}/attributes/${attrId}`
@@ -29,7 +29,7 @@ export function getQuitParams (id, attrId) {
 }
 
 // 提交修改后的动态/静态属性
-export function putSubmitParams (id, paramsForm, attr_sel) {
+export function putSubmitParams(id, paramsForm, attr_sel) {
   return requset({
     method: "PUT",
     url: `categories/${id}/attributes/${paramsForm.attr_id}`,
@@ -45,7 +45,7 @@ export function putSubmitParams (id, paramsForm, attr_sel) {
 }
 
 // 删除动态/静态属性
-export function deleteParams (id, attr_id) {
+export function deleteParams(id, attr_id) {
   return requset({
     method: "DELETE",
     url: `categories/${id}/attributes/${attr_id}`

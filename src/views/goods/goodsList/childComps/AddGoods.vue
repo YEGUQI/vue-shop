@@ -312,7 +312,6 @@ export default {
         addForm.attrs = this.addGoodsForm.attrs
         // 发送添加商品请求
         const { data: result } = await addGoods(addForm)
-        console.log(result)
         if (result.meta.status !== 201) {
           return this.$message.error("添加商品失败")
         }

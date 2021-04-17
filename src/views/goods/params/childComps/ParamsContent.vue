@@ -408,7 +408,6 @@ export default {
       row.inputValue = ""
       row.inputVisible = false
       const { data: result } = await putSubmitParams(this.activeCateID, row)
-      console.log(result)
       if (result.meta.status !== 200) {
         return this.$message.error("修改参数项失败")
       }
@@ -427,7 +426,6 @@ export default {
     async closeHandleTag(i, row) {
       row.attr_vals.splice(i, 1)
       const { data: result } = await putSubmitParams(this.activeCateID, row)
-      console.log(result)
       if (result.meta.status !== 200) {
         return this.$message.error("修改参数项失败")
       }

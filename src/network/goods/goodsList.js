@@ -1,6 +1,6 @@
 import { requset } from "../requset"
 // 获取商品列表数据
-export function getGoodList (queryInfo) {
+export function getGoodList(queryInfo) {
   return requset({
     method: "GET",
     url: "goods/",
@@ -9,7 +9,7 @@ export function getGoodList (queryInfo) {
 }
 
 // 删除商品
-export function deleteGoodsById (id) {
+export function deleteGoodsById(id) {
   return requset({
     method: "DELETE",
     url: "goods/" + id
